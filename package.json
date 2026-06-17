@@ -9,7 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.2",
+    "@vercel/analytics": "^2.0.1",
+    "caniuse-lite": "^1.0.30001799",
     "next": "16.2.9",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
