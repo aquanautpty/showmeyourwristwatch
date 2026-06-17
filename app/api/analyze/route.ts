@@ -84,7 +84,7 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
       }
     }
 
-    const { error: dbError } = await supabase.from('analyses').insert({
+    const { error: dbError, data: dbData } = await supabase.from('analyses').insert({
       watch: parsed.watch,
       style: parsed.style,
       age: parsed.age,
@@ -93,8 +93,12 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
       car: parsed.car,
       vibe: parsed.vibe,
       emoji: parsed.emoji,
-    });
-    if (dbError) console.error('Supabase insert error:', dbError.message);
+    }).select();
+    if (dbError) {
+      console.error('Supabase insert error:', JSON.stringify(dbError));
+    } else {
+      console.log('Supabase insert OK:', JSON.stringify(dbData));
+    }
 
     return NextResponse.json(parsed);
   } catch (err: unknown) {
