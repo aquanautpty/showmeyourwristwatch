@@ -84,7 +84,7 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
       }
     }
 
-    await supabase.from('analyses').insert({
+    const { error: dbError } = await supabase.from('analyses').insert({
       watch: parsed.watch,
       style: parsed.style,
       age: parsed.age,
@@ -94,6 +94,7 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
       vibe: parsed.vibe,
       emoji: parsed.emoji,
     });
+    if (dbError) console.error('Supabase insert error:', dbError.message);
 
     return NextResponse.json(parsed);
   } catch (err: unknown) {
