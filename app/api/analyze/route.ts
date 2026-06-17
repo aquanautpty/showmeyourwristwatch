@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
 export const maxDuration = 60;
 
@@ -71,13 +72,30 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
 
     const text = (response.content[0] as { type: string; text: string }).text;
 
+    let parsed: Record<string, unknown>;
     try {
-      return NextResponse.json(JSON.parse(text));
+      parsed = JSON.parse(text);
     } catch {
       const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) return NextResponse.json(JSON.parse(jsonMatch[0]));
-      return NextResponse.json({ error: 'Parse error', raw: text.slice(0, 200) }, { status: 500 });
+      if (jsonMatch) {
+        parsed = JSON.parse(jsonMatch[0]);
+      } else {
+        return NextResponse.json({ error: 'Parse error', raw: text.slice(0, 200) }, { status: 500 });
+      }
     }
+
+    await supabase.from('analyses').insert({
+      watch: parsed.watch,
+      style: parsed.style,
+      age: parsed.age,
+      job: parsed.job,
+      music: parsed.music,
+      car: parsed.car,
+      vibe: parsed.vibe,
+      emoji: parsed.emoji,
+    });
+
+    return NextResponse.json(parsed);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error('Analyze error:', msg);
