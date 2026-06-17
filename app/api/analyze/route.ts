@@ -1,6 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
 
 export const maxDuration = 60;
 
@@ -84,20 +83,26 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
       }
     }
 
-    const { error: dbError, data: dbData } = await supabase.from('analyses').insert({
-      watch: parsed.watch,
-      style: parsed.style,
-      age: parsed.age,
-      job: parsed.job,
-      music: parsed.music,
-      car: parsed.car,
-      vibe: parsed.vibe,
-      emoji: parsed.emoji,
-    }).select();
-    if (dbError) {
-      console.error('Supabase insert error:', JSON.stringify(dbError));
-    } else {
-      console.log('Supabase insert OK:', JSON.stringify(dbData));
+    const dbRes = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/analyses`, {
+      method: 'POST',
+      headers: {
+        'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        watch: parsed.watch,
+        style: parsed.style,
+        age: parsed.age,
+        job: parsed.job,
+        music: parsed.music,
+        car: parsed.car,
+        vibe: parsed.vibe,
+        emoji: parsed.emoji,
+      }),
+    });
+    if (!dbRes.ok) {
+      console.error('Supabase insert error:', dbRes.status, await dbRes.text());
     }
 
     return NextResponse.json(parsed);
