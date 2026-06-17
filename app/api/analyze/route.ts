@@ -99,6 +99,10 @@ Respond ONLY with a valid JSON object, no markdown, no extra text:
         car: parsed.car,
         vibe: parsed.vibe,
         emoji: parsed.emoji,
+        song: parsed.song,
+        quote: parsed.quote,
+        roast: parsed.roast,
+        personality: parsed.personality,
       }),
     });
     if (!dbRes.ok) {
