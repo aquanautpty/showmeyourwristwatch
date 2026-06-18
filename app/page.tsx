@@ -44,7 +44,7 @@ function SketchCard({ label, title, prompt }: { label: string; title?: string; p
       <div className="relative aspect-video bg-zinc-800">
         {!loaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-            <div className="w-6 h-6 border-2 border-zinc-700 border-t-emerald-400 rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-zinc-700 border-t-blue-400 rounded-full animate-spin" />
             <p className="text-zinc-600 text-xs">Loading…</p>
           </div>
         )}
@@ -62,9 +62,9 @@ function SketchCard({ label, title, prompt }: { label: string; title?: string; p
 
 const styleColors: Record<string, string> = {
   modern:  'from-blue-500 to-cyan-400',
-  vintage: 'from-emerald-600 to-green-400',
-  sporty:  'from-green-500 to-emerald-400',
-  luxury:  'from-green-500 to-emerald-300',
+  vintage: 'from-amber-600 to-yellow-500',
+  sporty:  'from-orange-500 to-red-400',
+  luxury:  'from-blue-700 to-blue-400',
   casual:  'from-purple-500 to-pink-400',
 };
 
@@ -262,11 +262,11 @@ export default function Home() {
     }
 
     // Green top bar
-    ctx.fillStyle = '#10b981'; ctx.fillRect(0, 0, W, 8);
+    ctx.fillStyle = '#1d4ed8'; ctx.fillRect(0, 0, W, 8);
 
     // App title top-left
     ctx.font = 'bold 26px system-ui, sans-serif';
-    ctx.fillStyle = '#10b981'; ctx.textAlign = 'left';
+    ctx.fillStyle = '#1d4ed8'; ctx.textAlign = 'left';
     ctx.fillText('SHOW ME YOUR WRISTWATCH', PAD, 108);
 
     // Intro line
@@ -276,12 +276,12 @@ export default function Home() {
     let y = PHOTO_Y + PHOTO_SIZE + 72;
 
     // Watch name
-    ctx.font = 'bold 52px system-ui, sans-serif'; ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 52px system-ui, sans-serif'; ctx.fillStyle = '#60a5fa';
     y = wrapText(ctx, profile.watch, PAD, y, W - PAD * 2, 64);
     y += 20;
 
     const badge = styleLabel[profile.style] ?? profile.style;
-    ctx.font = 'bold 24px system-ui, sans-serif'; ctx.fillStyle = '#10b981';
+    ctx.font = 'bold 24px system-ui, sans-serif'; ctx.fillStyle = '#1d4ed8';
     ctx.fillText(badge, PAD, y); y += 64;
 
     // Divider
@@ -321,9 +321,9 @@ export default function Home() {
     y += 80;
 
     // CTA
-    ctx.font = 'bold 32px system-ui, sans-serif'; ctx.fillStyle = '#10b981'; ctx.textAlign = 'center';
+    ctx.font = 'bold 32px system-ui, sans-serif'; ctx.fillStyle = '#1d4ed8'; ctx.textAlign = 'center';
     ctx.fillText('Now try yours →', W / 2, y); y += 52;
-    ctx.font = '500 26px system-ui, sans-serif'; ctx.fillStyle = '#34d399';
+    ctx.font = '500 26px system-ui, sans-serif'; ctx.fillStyle = '#60a5fa';
     ctx.fillText('showmeyourwristwatch.vercel.app', W / 2, y);
 
     // Footer
@@ -404,17 +404,17 @@ export default function Home() {
 
       {/* Header */}
       <div className="text-center pt-12 pb-8 px-4">
-        <p className="text-xs text-emerald-400 uppercase mb-3" style={{ letterSpacing: '0.35em' }}>
+        <p className="text-xs text-blue-400 uppercase mb-3" style={{ letterSpacing: '0.35em' }}>
           AI Watch Personality Reader
         </p>
         <h1 className="text-3xl sm:text-5xl font-black leading-tight max-w-2xl mx-auto">
           Show me your{' '}
-          <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
             wristwatch
           </span>
           <br />
           and I'll tell you{' '}
-          <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
             who you are
           </span>
         </h1>
@@ -427,7 +427,7 @@ export default function Home() {
         {/* QR — solo desktop, solo si no hay resultados */}
         {!profile && (
           <div className="hidden sm:flex flex-col items-center gap-2 mt-6">
-            <div className="bg-white p-3 rounded-xl shadow-lg shadow-emerald-400/10">
+            <div className="bg-white p-3 rounded-xl shadow-lg shadow-blue-400/10">
               <QRCodeSVG value={APP_URL} size={100} bgColor="#ffffff" fgColor="#1a1a1a" />
             </div>
             <p className="text-zinc-500 text-xs">Scan to open on your phone</p>
@@ -445,7 +445,7 @@ export default function Home() {
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
             className={`relative rounded-2xl border-2 border-dashed overflow-hidden transition-all duration-200
-              ${dragging ? 'border-emerald-400 bg-emerald-400/5' : 'border-zinc-700 hover:border-zinc-500'}
+              ${dragging ? 'border-blue-400 bg-blue-400/5' : 'border-zinc-700 hover:border-zinc-500'}
               ${!image ? 'cursor-pointer' : ''}`}
           >
             <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
@@ -469,8 +469,8 @@ export default function Home() {
         {/* Loading */}
         {loading && (
           <div className="mt-6 flex flex-col items-center gap-4 py-6 text-center">
-            <div className="w-12 h-12 border-4 border-zinc-800 border-t-emerald-400 rounded-full animate-spin" />
-            <p className="text-emerald-400 font-semibold text-base transition-all duration-500">{loadMsg}</p>
+            <div className="w-12 h-12 border-4 border-zinc-800 border-t-blue-400 rounded-full animate-spin" />
+            <p className="text-blue-400 font-semibold text-base transition-all duration-500">{loadMsg}</p>
             <p className="text-zinc-600 text-xs">This takes about 10 seconds</p>
           </div>
         )}
@@ -478,7 +478,7 @@ export default function Home() {
         {/* Analyze button */}
         {image && !profile && !loading && (
           <button onClick={analyze}
-            className="mt-4 w-full py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-emerald-500 to-green-400 text-black hover:from-emerald-400 hover:to-green-300 transition-all flex items-center justify-center gap-3">
+            className="mt-4 w-full py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-blue-700 to-blue-500 text-white hover:from-blue-600 hover:to-blue-400 transition-all flex items-center justify-center gap-3">
             ⌚ Tell me who I am
           </button>
         )}
@@ -491,8 +491,8 @@ export default function Home() {
 
             {/* Shared view banner */}
             {isSharedView && (
-              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 text-center">
-                <p className="text-emerald-400 font-semibold text-sm">👀 A friend shared their watch personality with you!</p>
+              <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-4 text-center">
+                <p className="text-blue-400 font-semibold text-sm">👀 A friend shared their watch personality with you!</p>
                 <button onClick={reset} className="text-zinc-400 text-xs mt-1 underline">Try with your own watch →</button>
               </div>
             )}
@@ -506,9 +506,9 @@ export default function Home() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Watch Detected</p>
-                    <p className="text-xl font-bold text-emerald-400">{profile.watch}</p>
+                    <p className="text-xl font-bold text-blue-400">{profile.watch}</p>
                   </div>
-                  <span className={`bg-gradient-to-r ${styleColors[profile.style] ?? 'from-emerald-500 to-green-400'} text-black text-xs font-bold px-3 py-1 rounded-full shrink-0`}>
+                  <span className={`bg-gradient-to-r ${styleColors[profile.style] ?? 'from-blue-700 to-blue-400'} text-white text-xs font-bold px-3 py-1 rounded-full shrink-0`}>
                     {styleLabel[profile.style] ?? profile.style}
                   </span>
                 </div>
@@ -549,8 +549,8 @@ export default function Home() {
             </div>
 
             {/* Quote */}
-            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5">
-              <p className="text-xs text-emerald-400 uppercase tracking-widest mb-2">Your Life Motto</p>
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-5">
+              <p className="text-xs text-blue-400 uppercase tracking-widest mb-2">Your Life Motto</p>
               <p className="text-white font-semibold text-lg">"{profile.quote}"</p>
             </div>
 
@@ -563,7 +563,7 @@ export default function Home() {
             {/* Share */}
             <div className="grid grid-cols-2 gap-3">
               <button onClick={share} disabled={sharing}
-                className="py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-emerald-500 to-green-400 text-black hover:from-emerald-400 hover:to-green-300 transition-all flex items-center justify-center gap-2 disabled:opacity-60">
+                className="py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-blue-700 to-blue-500 text-white hover:from-blue-600 hover:to-blue-400 transition-all flex items-center justify-center gap-2 disabled:opacity-60">
                 {sharing
                   ? <><div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" /> Creating...</>
                   : shared ? '✅ Saved!' : '📸 Share results'}
@@ -581,7 +581,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => { setVerdictOpen(true); setVerdict(null); }}
-                className="py-4 rounded-2xl font-bold text-sm border border-zinc-700 text-zinc-300 hover:border-emerald-400 hover:text-emerald-400 transition-all">
+                className="py-4 rounded-2xl font-bold text-sm border border-zinc-700 text-zinc-300 hover:border-blue-400 hover:text-blue-400 transition-all">
                 🎯 Tell me how I did
               </button>
               <a
@@ -603,14 +603,14 @@ export default function Home() {
                     <div className="flex gap-2 justify-center flex-wrap">
                       {(['nailed', 'close', 'miss'] as const).map((v, i) => (
                         <button key={v} onClick={() => setVerdict(v)}
-                          className="px-4 py-2 rounded-full text-sm font-semibold border border-zinc-700 text-zinc-300 hover:border-emerald-400 hover:text-emerald-400 transition-all">
+                          className="px-4 py-2 rounded-full text-sm font-semibold border border-zinc-700 text-zinc-300 hover:border-blue-400 hover:text-blue-400 transition-all">
                           {['✅ Nailed it', '🤏 Pretty close', '❌ Way off'][i]}
                         </button>
                       ))}
                     </div>
                   </>
                 )}
-                {verdict === 'nailed' && <p className="text-2xl font-black text-emerald-400">🎉 YES! The watch never lies.</p>}
+                {verdict === 'nailed' && <p className="text-2xl font-black text-blue-400">🎉 YES! The watch never lies.</p>}
                 {verdict === 'close'  && <p className="text-2xl font-black text-yellow-400">😅 Close enough — we'll take it.</p>}
                 {verdict === 'miss'   && <p className="text-2xl font-black text-red-400">💀 We'll do better next time... maybe.</p>}
                 {verdict && (
@@ -620,7 +620,7 @@ export default function Home() {
             )}
 
             <button onClick={reset}
-              className="w-full py-4 rounded-2xl font-bold text-sm border border-zinc-700 text-zinc-300 hover:border-emerald-400 hover:text-emerald-400 transition-all">
+              className="w-full py-4 rounded-2xl font-bold text-sm border border-zinc-700 text-zinc-300 hover:border-blue-400 hover:text-blue-400 transition-all">
               Try with another watch ⌚
             </button>
           </div>

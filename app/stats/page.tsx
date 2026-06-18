@@ -26,8 +26,8 @@ function topN(items: string[], n = 5): { name: string; count: number }[] {
 
 const styleColors: Record<string, string> = {
   modern: 'bg-blue-500',
-  vintage: 'bg-emerald-600',
-  sporty: 'bg-green-500',
+  vintage: 'bg-blue-700',
+  sporty: 'bg-blue-500',
   luxury: 'bg-yellow-500',
   casual: 'bg-purple-500',
 };
@@ -60,14 +60,14 @@ export default async function StatsPage() {
 
         {/* Header */}
         <div className="text-center">
-          <p className="text-xs text-emerald-400 uppercase mb-2" style={{ letterSpacing: '0.3em' }}>Dashboard</p>
+          <p className="text-xs text-blue-400 uppercase mb-2" style={{ letterSpacing: '0.3em' }}>Dashboard</p>
           <h1 className="text-3xl font-black">Show Me Your Wristwatch</h1>
           <p className="text-zinc-500 text-sm mt-1">Analytics en tiempo real</p>
         </div>
 
         {/* Total */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center">
-          <p className="text-7xl font-black text-emerald-400">{total}</p>
+          <p className="text-7xl font-black text-blue-400">{total}</p>
           <p className="text-zinc-400 mt-2 text-lg">relojes analizados</p>
         </div>
 
@@ -99,7 +99,7 @@ export default async function StatsPage() {
             <ol className="space-y-2">
               {watches.map((w, i) => (
                 <li key={w.name} className="flex items-start gap-2 text-sm">
-                  <span className="text-emerald-400 font-bold w-4 shrink-0">{i + 1}.</span>
+                  <span className="text-blue-400 font-bold w-4 shrink-0">{i + 1}.</span>
                   <span className="text-zinc-200 leading-snug">{w.name}</span>
                   <span className="text-zinc-600 ml-auto shrink-0">×{w.count}</span>
                 </li>
@@ -111,7 +111,7 @@ export default async function StatsPage() {
             <ol className="space-y-2">
               {cars.map((c, i) => (
                 <li key={c.name} className="flex items-start gap-2 text-sm">
-                  <span className="text-emerald-400 font-bold w-4 shrink-0">{i + 1}.</span>
+                  <span className="text-blue-400 font-bold w-4 shrink-0">{i + 1}.</span>
                   <span className="text-zinc-200 leading-snug">{c.name}</span>
                   <span className="text-zinc-600 ml-auto shrink-0">×{c.count}</span>
                 </li>
@@ -127,7 +127,7 @@ export default async function StatsPage() {
             <ol className="space-y-2">
               {jobs.map((j, i) => (
                 <li key={j.name} className="flex items-start gap-2 text-sm">
-                  <span className="text-emerald-400 font-bold w-4 shrink-0">{i + 1}.</span>
+                  <span className="text-blue-400 font-bold w-4 shrink-0">{i + 1}.</span>
                   <span className="text-zinc-200 leading-snug">{j.name}</span>
                   <span className="text-zinc-600 ml-auto shrink-0">×{j.count}</span>
                 </li>
@@ -139,7 +139,7 @@ export default async function StatsPage() {
             <ol className="space-y-2">
               {music.map((m, i) => (
                 <li key={m.name} className="flex items-start gap-2 text-sm">
-                  <span className="text-emerald-400 font-bold w-4 shrink-0">{i + 1}.</span>
+                  <span className="text-blue-400 font-bold w-4 shrink-0">{i + 1}.</span>
                   <span className="text-zinc-200 leading-snug">{m.name}</span>
                   <span className="text-zinc-600 ml-auto shrink-0">×{m.count}</span>
                 </li>
@@ -155,7 +155,7 @@ export default async function StatsPage() {
             {recent.map((a: any) => (
               <div key={a.id} className="flex items-center justify-between gap-3 border-b border-zinc-800 pb-3 last:border-0 last:pb-0">
                 <div>
-                  <p className="text-sm font-semibold text-emerald-400">{a.watch}</p>
+                  <p className="text-sm font-semibold text-blue-400">{a.watch}</p>
                   <p className="text-xs text-zinc-500 mt-0.5 italic">"{a.vibe}"</p>
                 </div>
                 <div className="text-right shrink-0">
@@ -168,7 +168,7 @@ export default async function StatsPage() {
         </div>
 
         <p className="text-center text-zinc-700 text-xs pb-4">
-          <a href="/" className="hover:text-emerald-400 transition-colors">← Volver al app</a>
+          <a href="/" className="hover:text-blue-400 transition-colors">← Volver al app</a>
         </p>
       </div>
     </main>
